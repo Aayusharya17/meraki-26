@@ -40,7 +40,7 @@ const Navbar = () => {
             </Link>
             
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden lg:flex items-center gap-6">
                 <div className="flex gap-6 font-pixel text-white/80 text-sm tracking-widest">
                     <Link to="/" className="hover:text-white cursor-pointer hover:underline decoration-accent-400 underline-offset-4">HOME</Link>
                     <Link to="/about" className="hover:text-white cursor-pointer hover:underline decoration-accent-400 underline-offset-4">ABOUT</Link>
@@ -61,6 +61,18 @@ const Navbar = () => {
                 </button>
             </div>
 
+            {/* Tablet Menu Button (md to <lg) */}
+<div className="hidden md:flex lg:hidden z-50">
+    <button
+        onClick={toggleMenu}
+        className="text-white text-3xl font-minecraft tracking-widest focus:outline-none hover:text-accent-400 transition-colors duration-200"
+    >
+        {isOpen ? <FaTimes /> : "M"}
+    </button>
+</div>
+
+
+
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isOpen && (
@@ -69,13 +81,27 @@ const Navbar = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: '100%' }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-black/95 z-40 flex flex-col items-center justify-center md:hidden"
+                        className="fixed inset-0 bg-black/95 z-40 flex flex-col items-center justify-center lg:hidden"
                     >
-                        <div className="flex flex-col gap-8 font-pixel text-white text-xl tracking-widest text-center">
-                            <Link to="/" onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">HOME</Link>
-                            <Link to="/about" onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">ABOUT</Link>
-                            <span onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">EVENTS</span>
-                        </div>
+<div className="flex flex-col gap-8 font-pixel text-white text-xl tracking-widest text-center">
+    <Link to="/" onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">HOME</Link>
+    <Link to="/about" onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">ABOUT</Link>
+    <Link to="/" onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">EVENTS</Link>
+    <Link to="/" onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">SPONSORS</Link>
+    <Link to="/" onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">FAQ</Link>
+    <Link to="/" onClick={toggleMenu} className="hover:text-accent-400 cursor-pointer">CONTACT US</Link>
+    <Link
+        to="https://iiitu.ac.in"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={toggleMenu}
+        className="hover:text-accent-400 cursor-pointer mt-4 text-lg font-terminal"
+    >
+        IIIT Una
+    </Link>
+</div>
+
+
                     </motion.div>
                 )}
             </AnimatePresence>
