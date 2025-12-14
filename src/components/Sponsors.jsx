@@ -1,41 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import bgImage from '../assets/about_image3.webp';
 import charArt from '../assets/sponsors_character_art.webp';
+
 
 
 const sponsorImages = [
     {
         x: 154,
         y: 56,
-        url: `https://picsum.photos/seed/hi/200`,
+        url: `https://picsum.photos/seed/testing/200`,
         size: "200px",
         name: "Director",
         leftAnchored: true,
     }, {
         x: 563,
         y: 174,
-        url: `https://picsum.photos/seed/hii/200`,
+        url: `https://picsum.photos/seed/testing1/200`,
         size: "200px",
         name: "Director",
         leftAnchored: true,
     }, {
         x: 90,
         y: 401,
-        url: `https://picsum.photos/seed/hiii/200`,
+        url: `https://picsum.photos/seed/testing2/200`,
         size: "200px",
         name: "Director",
         leftAnchored: true,
     }, {
         x: 539,
         y: 500,
-        url: `https://picsum.photos/seed/hiiii/200`,
+        url: `https://picsum.photos/seed/testing3/200`,
         size: "200px",
         name: "Director",
         leftAnchored: false,
     }, {
         x: 120,
         y: 401,
-        url: `https://picsum.photos/seed/hiiiii/200`,
+        url: `https://picsum.photos/seed/testing4/200`,
         size: "200px",
         name: "Director",
         leftAnchored: false,
@@ -55,6 +57,9 @@ export default function Sponsors() {
             if (w < 768) setSmallDevice(true);
             else setSmallDevice(false);
         }
+
+        // Do the calculations once on the initial load
+        onResize();
         window.addEventListener("resize", onResize);
         return () => window.removeEventListener("resize", onResize);
     }, []);
@@ -72,7 +77,7 @@ export default function Sponsors() {
                 </h2>
 
                 {/* Minecraft Character - Top Right */}
-                <div className="absolute hidden -top-25 right-10 sm:block sm:w-30 sm:h-40 md:w-60 md:h-80 z-10">
+                <div className="absolute hidden top-0 right-10 sm:block sm:w-30 sm:h-40 md:w-60 md:h-80 z-10">
                     <img
                         src={charArt}
                         alt="Minecraft Creeper"
