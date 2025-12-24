@@ -23,7 +23,6 @@ import { appleSlideUp, appleScaleIn, sectionTransition } from "../utils/motion";
  * @returns {JSX.Element} Events section with tab navigation and detail panel
  * 
  * @state activeTab - Currently selected event ID
- * @animation AnimatePresence - Handles enter/exit transitions when switching tabs
  */
 function Elite() {
   // Filter to show only elite (featured) events
@@ -155,20 +154,10 @@ function Elite() {
                     relative group text-left transition-all duration-300
                     shrink-0 md:shrink w-[200px] sm:w-[240px] md:w-full snap-start
                     bg-[#474747] border-[3px] border-solid
-                    ${isActive
-                        /**
-                         * Active Tab Border Style
-                         * 
-                         * Removes right border on desktop to "connect" with panel.
-                         * Uses negative margin to overlap with panel border.
-                         * 
-                         * @css border-r-0 on desktop creates seamless connection
-                         */
-                        ? "border-t-[#888888] border-l-[#666666] border-r-[#888888] md:border-r-0 border-b-0 md:border-b-[#1a1a1a] " +
-                        "md:w-[calc(100%+3px)] " +  // Extend width to overlap panel border
-                        "mb-[-3px] md:mb-0"          // Overlap bottom tab
-                        : "border-t-[#888888] border-r-[#1a1a1a] border-b-[#1a1a1a] border-l-[#666666] hover:bg-[#575757]"
-                      }
+                   ${isActive
+                    ? "border-t-[#888888] border-l-[#666666] border-r-[#888888] md:border-r-0 border-b-0 md:border-b-[#1a1a1a] md:w-[calc(100%+3.1px)] md:-mr-[3px]"
+                     : "border-t-[#888888] border-r-[#1a1a1a] border-b-[#1a1a1a] border-l-[#666666] hover:bg-[#575757]"
+                   }
                   `}
                   >
                     {/* Inner content with inverted bevel */}
@@ -205,70 +194,41 @@ function Elite() {
               })}
             </motion.div>
 
-            {/* 
-             * Event Details Panel
-             * 
-             * Uses AnimatePresence for smooth enter/exit transitions
-             * when switching between tabs.
-             * 
-             * @animation
-             * - Enter: opacity 0→1, x: 20→0, scale: 0.98→1
-             * - Exit: opacity 1→0, x: 0→-20, scale: 1→0.98
-             * - Spring physics: stiffness=80, damping=20
-             */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, x: 20, scale: 0.98 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: -20, scale: 0.98 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 80,
-                  damping: 20
-                }}
-                className="relative z-20 w-full md:w-2/3
-                bg-[#474747] border-[3px] border-solid border-t-[#888888] border-r-[#1a1a1a] border-b-[#1a1a1a] border-l-[#888888]"
-              >
-                <div className="bg-[#3a3a3a] border-[2px] border-solid border-t-[#2a2a2a] border-r-[#555555] border-b-[#555555] border-l-[#2a2a2a] p-4 sm:p-6 md:p-8 flex flex-col gap-4 md:gap-6 items-center w-full h-full">
-                  {/* Event Image with hover zoom */}
-                  <div className="w-full relative group rounded-lg aspect-video overflow-hidden">
-                    <motion.img
-                      src={activeEvent.image}
-                      alt={activeEvent.title}
-                      initial={{ scale: 1.05 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                    />
-                    {/* Gradient overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  </div>
-
-                  {/* Description and CTA */}
-                  <div className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                    <div className="lg:w-2/3">
-                      <p className="font-minecraft text-gray-300 text-xs sm:text-sm leading-relaxed">
-                        {activeEvent.description}
-                      </p>
-                    </div>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => navigate(`/event/${activeEvent.slug}`)}
-                      className="self-start lg:self-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#D79928] to-[#C57135] border-2 border-white text-black font-minecraft text-xs sm:text-sm hover:from-[#E5A935] hover:to-[#D17E42] transition-all duration-300 rounded-sm cursor-pointer"
-                    >
-                      VIEW DETAILS →
-                    </motion.button>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
-        </div>
-      </motion.div>
-    </section>
-  );
+           <motion.div
+             className="relative z-20 w-full md:w-2/3 shadow-none
+             bg-[#474747] border-[3px] border-solid border-t-[#888888] border-r-[#1a1a1a] border-b-[#1a1a1a] md:border-l-0"
+           >
+             <div className="bg-[#3a3a3a] border-[2px] border-solid border-t-[#2a2a2a] border-r-[#555555] border-b-[#555555] border-l-[#2a2a2a] p-4 sm:p-6 md:p-8 flex flex-col gap-4 md:gap-6 items-center w-full h-full">
+               <div className="w-full relative group rounded-lg aspect-video overflow-hidden">
+                 <img
+                   src={activeEvent.image}
+                   alt={activeEvent.title}
+                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                 />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+               </div>
+               <div className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                 <div className="lg:w-2/3">
+                   <p className="font-minecraft text-gray-300 text-xs sm:text-sm leading-relaxed">
+                     {activeEvent.description}
+                   </p>
+                 </div>
+                 <motion.button
+                   whileHover={{ scale: 1.05 }}
+                   whileTap={{ scale: 0.98 }}
+                   onClick={() => navigate(`/event/${activeEvent.slug}`)}
+                   className="self-start lg:self-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#D79928] to-[#C57135] border-2 border-white text-black font-minecraft text-xs sm:text-sm hover:from-[#E5A935] hover:to-[#D17E42] transition-all duration-300 rounded-sm cursor-pointer"
+                 >
+                   VIEW DETAILS →
+                 </motion.button>
+               </div>
+             </div>
+           </motion.div>
+         </motion.div>
+       </div>
+     </motion.div>
+   </section>
+ );
 }
 
 export default Elite;
