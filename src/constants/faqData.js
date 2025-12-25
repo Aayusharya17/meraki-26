@@ -25,13 +25,13 @@ export const faqData = [
     },
     {
         id: 2,
-        question: "Who organizes it?",
-        answer: "The festival is managed by student clubs and committees, with faculty guidance."
+        question: "When is MERAKI 2026?",
+        answer: "MERAKI 2026 will be held from February 5-7, 2026 at IIIT Una's Saloh campus."
     },
     {
         id: 3,
-        question: "What events are included?",
-        answer: "A mix of coding contests, hackathons, robotics, music, dance, drama, and sports."
+        question: "How do I register for events?",
+        answer: "You can register for events through our website by clicking on the 'Register Now' button for your desired event."
     },
     {
         id: 4,
@@ -50,8 +50,8 @@ export const faqData = [
     },
     {
         id: 7,
-        question: "Does Meraki have sponsors?",
-        answer: "Yes, supported by corporates, startups, and local businesses."
+        question: "How does Meraki impact the community?",
+        answer: "Meraki provides a platform for students to showcase their technical skills, learn new technologies, and connect with like-minded individuals. It also helps in building a community of technical enthusiasts."
     },
     {
         id: 8,
@@ -60,13 +60,13 @@ export const faqData = [
     },
     {
         id: 9,
-        question: "Are prizes awarded?",
-        answer: "Yes, winners get cash prizes, certificates, and goodies."
+        question: "How do I reach IIIT Una campus?",
+        answer: "IIIT Una is located in Saloh, Himachal Pradesh. The nearest railway station is Una Himachal and there is good connectivity by road from Chandigarh."
     },
     {
         id: 10,
-        question: "Why is Meraki important?",
-        answer: "It helps students develop skills, network, and showcase creativity beyond academics."
+        question: "Is food provided during the fest?",
+        answer: "Yes, food stalls and a festival canteen will be operational throughout the event."
     },
     {
         id: 11,
